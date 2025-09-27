@@ -1,27 +1,8 @@
 # Course Q&A RAG Chatbot
 
-A production-ready multilingual course Q&A chatbot with hybrid retrieval, inline citations, and comprehensive document analysis capabilities.
+A production-ready multilingual course Q&A chatbot with hybrid retrieval, inline citations, and comprehensive document analysis capabilities.This Course Q&A Chatbot uses RAG (Retrieval-Augmented Generation) to answer questions based on course materials with source citations. It combines semantic search and LLMs to deliver accurate, transparent, and context-aware responses, helping students learn efficiently and reducing instructor workload.
 
-## 🚀 Features
-
-✅ **Hybrid Retrieval**: Vector search + BM25 + Cross-encoder reranking  
-✅ **Inline Citations**: [S1:filename.pdf:pp3] format with clickable source viewer  
-✅ **Multilingual Support**: English + Hindi with automatic translation  
-✅ **Document Processing**: PDF, Markdown, CSV upload & processing  
-✅ **Session Management**: Isolated document sessions with export  
-✅ **PDF Export**: Export Q&A sessions as PDF reports (English only)  
-✅ **Real-time UI**: Live document upload with drag & drop  
-✅ **Intent Detection**: Automatically detects query intent (definitions, applications, methods)  
-✅ **Comprehensive Answers**: Structured responses with multiple sections  
-
-## 📊 Performance Metrics
-
-- **Response Time**: <2.5s p95 latency
-- **Recall@5**: ≥75% relevant document retrieval
-- **Faithfulness**: ≥90% citation accuracy
-- **Uptime**: 99.9% availability
-
-## 🏗️ Architecture
+##  Architecture
 
 **Tech Stack:**
 - **Backend**: FastAPI + LangChain + Python 3.10
@@ -32,49 +13,50 @@ A production-ready multilingual course Q&A chatbot with hybrid retrieval, inline
 
 **AWS Services:**
 - Amazon Bedrock (Claude 3 Sonnet)
+**Pinecone Services**
 - Pinecone (Vector database)
 
 ## 📁 Project Structure
 
 ```
-rag-chatbot/
-├── app/                          # FastAPI backend
+
+├── app/                               # FastAPI backend
 │   ├── api/
-│   │   └── main.py              # API endpoints
+│   │   └── main.py                    # API endpoints
 │   ├── models/
-│   │   └── schemas.py           # Pydantic models
+│   │   └── schemas.py                 # Pydantic models
 │   ├── services/
-│   │   ├── langchain_rag.py     # Main RAG service
-│   │   ├── document_processor.py # Document processing
-│   │   ├── hybrid_retriever.py  # Hybrid search
-│   │   ├── cross_encoder.py     # Reranking
-│   │   ├── session_manager.py   # Session management
-│   │   ├── metrics.py           # Performance tracking
-│   │   └── translation_service.py # Hindi-English translation
+│   │   ├── langchain_rag.py           # Main RAG service
+│   │   ├── document_processor.py      # Document processing
+│   │   ├── hybrid_retriever.py        # Hybrid search
+│   │   ├── cross_encoder.py           # Reranking
+│   │   ├── session_manager.py         # Session management
+│   │   ├── metrics.py                 # Performance tracking
+│   │   └── translation_service.py     # Hindi-English translation
 │   └── __init__.py
-├── frontend/                     # React frontend
+├── frontend/                          # React frontend
 │   ├── src/
 │   │   ├── components/
-│   │   │   └── SourceViewer.jsx # Citation viewer
-│   │   ├── App.js              # Main component
-│   │   ├── App.css             # Styling
-│   │   └── index.js            # Entry point
+│   │   │   └── SourceViewer.jsx       # Citation viewer
+│   │   ├── App.js                     # Main component
+│   │   ├── App.css                    # Styling
+│   │   └── index.js                   # Entry point
 │   ├── public/
-│   │   └── index.html          # HTML template
-│   └── package.json            # Dependencies
+│   │   └── index.html                 # HTML template
+│   └── package.json                   # Dependencies
 ├── static/
 │   └── NotoSansDevanagari-Regular.ttf # Hindi font
-├── .env.example                 # Environment template
-├── docker-compose.yml           # Docker configuration
-├── Dockerfile.backend           # Backend container
-├── Dockerfile.frontend          # Frontend container
-├── requirements.txt             # Python dependencies
-├── run-docker.bat              # Windows Docker script
-├── stop-docker.bat             # Windows stop script
-└── README.md                   # This file
+├── .env.example                       # Environment template
+├── docker-compose.yml                 # Docker configuration
+├── Dockerfile.backend                 # Backend container
+├── Dockerfile.frontend                # Frontend container
+├── requirements.txt                   # Python dependencies
+├── run-docker.bat                     # Windows Docker script
+├── stop-docker.bat                    # Windows stop script
+└── README.md                          # This file
 ```
 
-## 📋 Prerequisites
+##  Prerequisites
 
 ### Required Services
 1. **AWS Account** with Bedrock access
@@ -82,18 +64,17 @@ rag-chatbot/
 3. **Docker** installed locally
 
 ### API Keys Needed
-- AWS Access Key & Secret Key
+- AWS Access Key & Secret Key  ( or ) AWS API Key for BedRock 
 - Pinecone API Key & Index Name
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Clone & Setup
 ```bash
 git clone https://github.com/YOUR_USERNAME/rag-chatbot.git
-cd rag-chatbot
 
-# Copy environment template
-cp .env.example .env
+# Copy environment Variables
+cp .env
 ```
 
 ### 2. Configure Credentials
@@ -102,26 +83,13 @@ Edit `.env` with your API keys:
 # Required: Add your actual credentials
 AWS_ACCESS_KEY_ID=your_aws_access_key_here
 AWS_SECRET_ACCESS_KEY=your_aws_secret_key_here
-AWS_DEFAULT_REGION=us-east-1
+AWS_DEFAULT_REGION=us-east-1           #Ensure all the services are available in the Region 
 PINECONE_API_KEY=your_pinecone_api_key_here
 PINECONE_INDEX_NAME=your_index_name_here
 ```
 
-### 3. Run with Docker
-```bash
-# Windows
-run-docker.bat
+### 3. Manual and Docker Setup
 
-# Linux/Mac
-docker-compose up --build
-```
-
-### 4. Access Application
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
-
-## 🔧 Manual Setup (Alternative)
 
 ### Backend
 ```bash
@@ -159,7 +127,15 @@ docker-compose logs -f
 docker-compose up --build backend
 ```
 
-## 📊 API Endpoints
+
+### 4. Access Application
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
+- **API Docs**: http://localhost:8000/docs
+
+
+
+##  API Endpoints
 
 ### Core Endpoints
 - `POST /answer` - Query chatbot with citations
@@ -225,24 +201,24 @@ curl "http://localhost:8000/source/S1:document.pdf:pp3"
 Sources: [S1:doc.pdf:pp3], [S2:doc.pdf:pp5], ...
 ```
 
-## 🔒 Security
+##  Features
 
-- **Credentials**: Never commit `.env` files (excluded by `.gitignore`)
-- **Template**: Use `.env.example` for setup reference
-- **Docker**: Environment variables loaded securely
-- **Production**: Use environment-specific configurations
+ - **Hybrid Retrieval**      : Vector search + BM25 + Cross-encoder reranking  
+ - **Inline Citations**      : [S1:filename.pdf:pp3] format with clickable source viewer  
+ - **Multilingual Support**  : English + Hindi with automatic translation  
+ - **Document Processing**   : PDF, Markdown, CSV upload & processing  
+ - **Session Management**    : Isolated document sessions with export  
+ - **PDF Export**            : Export Q&A sessions as PDF reports (English only)  
+ - **Real-time UI**          : Live document upload with drag & drop  
+ - **Intent Detection**      : Automatically detects query intent (definitions, applications, methods)  
+ - **Comprehensive Answers** : Structured responses with multiple sections  
 
-## 🚀 Deployment Options
+##  Deployment Options
 
 ### Local Development
 ```bash
 docker-compose up --build
 ```
-
-### Production
-- AWS ECS/Fargate
-- Google Cloud Run
-- Azure Container Instances
 
 ## 🔧 Configuration
 
@@ -262,7 +238,7 @@ DEBUG=false
 LOG_LEVEL=INFO
 ```
 
-## 📈 Performance Optimization
+##  Performance Optimization
 
 ### Retrieval Optimization
 - **Parallel Processing**: Vector and BM25 search run concurrently
@@ -276,7 +252,7 @@ LOG_LEVEL=INFO
 - **Caching**: Frequent queries cached for performance
 - **Batch Processing**: Multiple documents processed simultaneously
 
-## 🆘 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
@@ -317,9 +293,6 @@ docker-compose up --build
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 🎯 Key Features Explained
 
@@ -329,25 +302,22 @@ Combines three retrieval methods for optimal accuracy:
 2. **BM25 Search**: Keyword-based lexical matching
 3. **Cross-encoder Reranking**: Context-aware result refinement
 
-### Intent Detection
-Automatically detects what users are asking for:
-- **Definitions**: "What is data mining?"
-- **Applications**: "Data warehousing applications"
-- **Methods**: "How does machine learning work?"
-- **Concepts**: "Key principles of AI"
 
 ### Citation System
-- **Inline Citations**: [S1:filename.pdf:pp3] format
-- **Clickable Sources**: Click citations to view source content
-- **Page Accuracy**: Citations map to correct document pages
+- **Inline Citations**: [S1:filename.pdf:pp3] format with Click to view source content
 - **Source Viewer**: Right panel shows detailed source information
 
 ### Multilingual Support
 - **Query Translation**: Hindi queries translated to English
 - **Response Translation**: Answers translated back to Hindi
-- **Local Translation**: Uses local dictionary mapping
-- **Unicode Support**: Proper handling of Devanagari script
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
 **⚠️ Important**: Always configure your `.env` file with real credentials before running the application!
+
+---
+
